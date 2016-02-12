@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="js/jquery.js"></script>
+    <style>
+        .black #header { color: #fff }
+        #header { color: #000 }
+    </style>
+</head>
+<body>
+<form>
+    <p>Adicionando Novos Item em Listagem</p>
+    LINK: <input type="text" id="txt">
+    <input type="button" value="Adicionar" id="inserir">
+</form>
+<ul id="lista"></ul>
+<hr>
+<p>Mudando Cor de DIV</p>
+<select id="cor">
+    <option value="">PADRÃO</option>
+    <option value="1">VERMELHO</option>
+    <option value="2">AZUL</option>
+</select>
+<br><br>
+<div id="mude">MUDE AQUI A COR</div>
+<hr>
+<p>Mudando Texto da DIV</p>
+<br>
+<div id="texto_muda"><i>CLIQUE PARA MUDAR - TEXTO PRINCIPAL ORIGINAL</i></div>
+<hr>
+<p>Operações Matemáticas entre 2 Números</p>
+<br>
+    <input type="text" style="width: 50px;" id="n1" value="0">
+    <select id="equacao">
+        <option value="">Escolha</option>
+        <option value="+">Adição</option>
+        <option value="-">Subtração</option>
+        <option value="*">Multiplicação</option>
+        <option value="/">Divisão</option>
+    </select>
+    <input type="text" style="width: 50px;" id="n2" value="0">
+    <input type="button" value="Calcular" id="calcula">
+    <br><br>
+    <b><div id="resultado" style="font-size: 30px; width: 60px; text-align: center">0</div></b>
+</form>
+</body>
+<script>
+    $(document).ready(function(){
+        $('#inserir').click(function(e){
+            $('#lista').append("<li>"+$('#txt').val()+"</li>");
+        });
+
+        $('#cor').change(function() {
+
+            switch(this.value) {
+                case '1':
+                    $("#mude").css("background","red");
+                    break;
+                case '2':
+                    $("#mude").css("background","blue");
+                    break;
+                default:
+                    $("#mude").css("background","white");
+            }
+        });
+
+        $('#texto_muda').click(function() {
+
+            $("#texto_muda").html("<i>TEXTO SECUNDÁRIO MUDIFICADO</i>");
+        });
+
+        $('#calcula').click(function() {
+
+            if($('#equacao').val() == ''){
+                alert('Selecione o Tipo de Equação');
+                $('#n1').val('');
+                $('#n2').val('');
+                $('#equacao').val('');
+            }else if(isNaN($('#n1').val())){
+                alert('Obrigatório Ser Numero');
+                $('#n1').val('');
+                $('#n1').focus();
+
+            }else if(isNaN($('#n2').val())){
+                alert('Obrigatório Ser Numero');
+                $('#n2').val('');
+                $('#n2').focus();
+
+            }else{
+                var N1 = $('#n1').val();
+                var N2 = $('#n2').val();
+                var Equacao = $('#equacao').val();
+                var Calculo = eval(N1+Equacao+N2);
+
+                $("#resultado").html(Calculo);
+                $("#resultado").css("color","white");
+                if(eval(N1+Equacao+N2) < 0){
+                    $("#resultado").css("background","red");
+                }else{
+                    $("#resultado").css("background","green");
+                }
+            }
+
+        });
+    });
+</script>
+</html>

@@ -1,0 +1,41 @@
+#1 - Listar nome dos usuários com nível de acesso entre 3 e 8
+SELECT
+	B.nome,
+	B.idade,
+	A.nivelAcesso
+FROM NivelAcesso A
+INNER JOIN Usuario B ON A.idUsuario = B.idUsuario
+WHERE
+	A.nivelAcesso >= 3
+	AND A.idUsuario <= 8
+
+
+#2 - Mostrar a quantidade de usuários com nível igual a 9
+SELECT
+	COUNT(A.idUsuario) AS QTD_USUARIO
+FROM NivelAcesso A
+WHERE
+	A.nivelAcesso = 9
+
+#3 - Listar nome e nível de acesso dos usuários que comecem com "A" e tenham mais de 20 anos
+SELECT
+	B.nome,
+	A.nivelAcesso
+FROM NivelAcesso A
+RIGHT JOIN Usuario B ON A.idUsuario = B.idUsuario
+WHERE
+	B.nome LIKE 'A%'
+	AND B.idade > 20
+GROUP BY
+	B.nome
+
+#4 - Atualizar o nível de acesso dos usuários 2, 3 e 4 para 10
+UPDATE NivelAcesso SET
+	nivelAcesso = 10
+WHERE
+	idUsuario IN('2','3','4')
+
+#5 - Remover todos dados do usuário 5
+DELETE FROM Usuario
+WHERE
+	idUsuario = '5'
